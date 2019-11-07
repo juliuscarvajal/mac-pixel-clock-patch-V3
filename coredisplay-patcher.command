@@ -18,47 +18,58 @@ oToolCoreDisplayCurrent="$(otool -t $CoreDisplayLocation |tail -n +2 |md5 -q)"
 # md5 checksum of '(__DATA,__data)' section exported by otool from unpatched CoreDisplays
 # for future use of detecting a false patch, where the executible's checksum is changed by codesigning but not the actual code.
 oToolCoreDisplayUnpatched=(
-  49cd8062ed1c8f610b71e9a3231cf804 '10.12 16A254g' 1
-  8e1030235b90d6ab0644bd7a1b6f9cdb '10.12 16A284a' 1
-  f4c6e84ffa97e06624e5504edd87bf7d '10.12 16A284a' 1 # I don't know why these two are different
-  4cba52b41ceee7bc658020c9e58780a3 '10.12 16A294a' 1
-  d41d8cd98f00b204e9800998ecf8427e '10.12 16A313a' 1
-  aa7607dd72a2a4ca70ce094a2fc39cce '10.12  ' 1  # Sierra 10.12 release
-  172b7e2fe2e45e99b078e69684dd3c10 '10.12.1' 2
-  9c717568024daa81c364a839f09a1bfd '10.12.2 and 10.12.3' 3
-  b7e8464b101f343012ba28cbd2db5ee8 '10.12.4 16E195' 3
-  54a5a1adfb1225411bacf5c3ee0b4d9a '10.12.5 16F73' 3
-  9a653ffdfb5e1bcfaa71412000d0b111 '10.12.6 16G29' 3
-  5f51331dce01f1ced84643f6c996e324 '10.13.2 (17C88) and 10.13.3 (17D47)' 4
-  6e04ad9d1f2bf43dc01ed92a0ba4b8ac '10.13.4 (17E199)' 4
-  a273850d90c3cdf39f17ad63ed43203a '10.13.5 (17F77)' 4
-  714a9e14ccc64b0cf4bef2f083087d8e '10.14.2 (18C54)' 5
-  814fe7a8695f6583d821b5665f6df71a '10.14.5 (18F132)' 5
-  105051509e563ba96f190ed78a52feb9 '10.14.6 (18G84)' 5
-  0d64ad0502866f101d4abdafcec54f66 '10.15 19A583' 5
+  # 49cd8062ed1c8f610b71e9a3231cf804 '10.12 16A254g' 1
+  # 8e1030235b90d6ab0644bd7a1b6f9cdb '10.12 16A284a' 1
+  # f4c6e84ffa97e06624e5504edd87bf7d '10.12 16A284a' 1 # I don't know why these two are different
+  # 4cba52b41ceee7bc658020c9e58780a3 '10.12 16A294a' 1
+  # d41d8cd98f00b204e9800998ecf8427e '10.12 16A313a' 1
+  # aa7607dd72a2a4ca70ce094a2fc39cce '10.12  ' 1  # Sierra 10.12 release
+  # 172b7e2fe2e45e99b078e69684dd3c10 '10.12.1' 2
+  # 9c717568024daa81c364a839f09a1bfd '10.12.2 and 10.12.3' 3
+  # b7e8464b101f343012ba28cbd2db5ee8 '10.12.4 16E195' 3
+  # 54a5a1adfb1225411bacf5c3ee0b4d9a '10.12.5 16F73' 3
+  # 9a653ffdfb5e1bcfaa71412000d0b111 '10.12.6 16G29' 3
+  # 5f51331dce01f1ced84643f6c996e324 '10.13.2 (17C88) and 10.13.3 (17D47)' 4
+  # 6e04ad9d1f2bf43dc01ed92a0ba4b8ac '10.13.4 (17E199)' 4
+  # a273850d90c3cdf39f17ad63ed43203a '10.13.5 (17F77)' 4
+  # 714a9e14ccc64b0cf4bef2f083087d8e '10.14.2 (18C54)' 5
+  # 814fe7a8695f6583d821b5665f6df71a '10.14.5 (18F132)' 5
+  # 105051509e563ba96f190ed78a52feb9 '10.14.6 (18G84)' 5
+  # 2168deeab49743b96a58954f8acacd81 '10.15 19A583' 5
+  0d64ad0502866f101d4abdafcec54f66 '10.15.1 19B88' 5
 )
+
+# typeset -A oToolCoreDisplayUnpatchedAssoc
+# oToolCoreDisplayUnpatchedAssoc=(2168deeab49743b96a58954f8acacd81 (5 '10.15 19A583')) #'10.15 19A583'
+# for key val in ${(kv)oToolCoreDisplayUnpatchedAssoc}; do
+#   echo "$key --> $val"
+# done
 
 # md5 checksum of '(__DATA,__data)' section exported by otool from patched CoreDisplays
 oToolCoreDisplayPatched=(
-  4e469fbf1c36d96fc25fb931c6670649 '10.12 16A254g'
-  b6ee4943c2fce505faceb568e1c8f4b1 '10.12 16A284a'
-  82f97933a3ae90d47054316fa8259f6c '10.12 16A284a'
-  1371f71ca7949cfbe01ede8e8b52e61d '10.12 16A294a'
-  f9c185d9e4c4ba12d5ecf41483055e39 '10.12 16A313a'
-  eb27b5d68e9fb15aa65ea0153637eae2 '10.12  '  # Sierra 10.12 release
-  cf8373138af4671a561c1a4d6cdba771 '10.12.1'
-  e9d7a42b6613a45a69a41e8099d0e369 '10.12.2 and 10.12.3'
-  ec01e0df5f71699c77bf2650a1c84f4f '10.12.4 16E195'
-  8b876f14be2bf7b1bfd3f89341bce0f6 '10.12.5 16F73'
-  6708362921f852600e59e68c3e811eda '10.12.6 16G29'
-  a337a6a85264817d78a90122ebbc2723 '10.13.2 (17C88) and 10.13.3 (17D47)'
-  11882f5e04a525da6701777c814c920a '10.13.4 (17E199)'
-  b5dd02fe05903d7c39791afc642f9b2b '10.13.5 (17F77)'
-  2d71736504e14882b2eb5e994859ec09 '10.14.2 (18C54)'
-  9581c3d50658882e79325bcf5f510245 '10.14.5 (18F132)'
-  d4f2aca73c7915c639dbe9a7b9cf5ecd '10.14.6 (18G84)'
-  0e2342a0798719765e3e12f8c34e7a5b '10.15 19A583'
+  # 4e469fbf1c36d96fc25fb931c6670649 '10.12 16A254g'
+  # b6ee4943c2fce505faceb568e1c8f4b1 '10.12 16A284a'
+  # 82f97933a3ae90d47054316fa8259f6c '10.12 16A284a'
+  # 1371f71ca7949cfbe01ede8e8b52e61d '10.12 16A294a'
+  # f9c185d9e4c4ba12d5ecf41483055e39 '10.12 16A313a'
+  # eb27b5d68e9fb15aa65ea0153637eae2 '10.12  '  # Sierra 10.12 release
+  # cf8373138af4671a561c1a4d6cdba771 '10.12.1'
+  # e9d7a42b6613a45a69a41e8099d0e369 '10.12.2 and 10.12.3'
+  # ec01e0df5f71699c77bf2650a1c84f4f '10.12.4 16E195'
+  # 8b876f14be2bf7b1bfd3f89341bce0f6 '10.12.5 16F73'
+  # 6708362921f852600e59e68c3e811eda '10.12.6 16G29'
+  # a337a6a85264817d78a90122ebbc2723 '10.13.2 (17C88) and 10.13.3 (17D47)'
+  # 11882f5e04a525da6701777c814c920a '10.13.4 (17E199)'
+  # b5dd02fe05903d7c39791afc642f9b2b '10.13.5 (17F77)'
+  # 2d71736504e14882b2eb5e994859ec09 '10.14.2 (18C54)'
+  # 9581c3d50658882e79325bcf5f510245 '10.14.5 (18F132)'
+  # d4f2aca73c7915c639dbe9a7b9cf5ecd '10.14.6 (18G84)'
+  # 71d81e5c35d1791ccb35c3157524f797 '10.15 19A583'
+  0e2342a0798719765e3e12f8c34e7a5b '10.15.1 19B88'
 )
+
+# typeset -A oToolCoreDisplayPatched
+# oToolCoreDisplayPatched[0e2342a0798719765e3e12f8c34e7a5b]='10.15.1 19B88'
 
 function makeExit {
   printf "Closing...\n"
@@ -202,8 +213,10 @@ function test {
   
   printf "\n"
 
+  indexOffset=1; # zsh arrays starts with 1. if bash, set to 0.
   nothingWasFound=true;
   for ((i=0; i < ${#oToolCoreDisplayUnpatched[@]}; i+=3)); do
+    printf "$oToolCoreDisplayCurrent <-<-<- ${oToolCoreDisplayUnpatched[$i]} PPP ${#oToolCoreDisplayUnpatched[@]}\n"
     if [[ $oToolCoreDisplayCurrent == ${oToolCoreDisplayUnpatched[$i]} ]]; then
       printf "(otool) Detected unpatched CoreDisplay on OS X %s.\n" "${oToolCoreDisplayUnpatched[$i+1]}"
       nothingWasFound=false
@@ -215,7 +228,7 @@ function test {
       fi
     fi
   done
-  for ((i=0; i < ${#oToolCoreDisplayPatched[@]}; i+=2)); do
+  for ((i=0; i <= ${#oToolCoreDisplayPatched[@]}; i+=2)); do
     printf "$oToolCoreDisplayCurrent >>> ${oToolCoreDisplayPatched[$i]}\n"
     if [[ $oToolCoreDisplayCurrent == ${oToolCoreDisplayPatched[$i]} ]]; then
       printf "(otool) Detected patched CoreDisplay on OS X %s.\n" "${oToolCoreDisplayPatched[$i]}"
@@ -280,3 +293,5 @@ function options {
 
 # Run the script
 options $1 $2
+
+exit
